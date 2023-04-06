@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: gateway-server
+  config:
+    import: optional:configserver:${CONFIG_SERVER:http://localhost:8071}
+
+#todo: move to config server
+
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+#      routes:
+#        - id: product-service
+#          uri: lb://product-service
+#          predicates:
+#            - Path=/product/**
+#          filters:
+#            - RewritePath=/product/(?<path>.*), /$\{path}
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: gateway
